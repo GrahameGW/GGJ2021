@@ -7,6 +7,7 @@ public class RoomLoader : MonoBehaviour
     public Room room;
     public GameObject wallPrefab;
     public GameObject floorPrefab;
+    public GameObject doorTriggerPrefab;
 
     List<GameObject> roomObjects = new List<GameObject>();
 
@@ -37,6 +38,7 @@ public class RoomLoader : MonoBehaviour
         var ceiling = Instantiate(floorPrefab);
         ceiling.transform.position = new Vector2(0, room.Height * 0.5f);
 
+
         roomObjects = new List<GameObject>()
         {
             leftWall,
@@ -44,6 +46,38 @@ public class RoomLoader : MonoBehaviour
             floor,
             ceiling
         };
+
+        if (room.DoorEast)
+        {
+            var obj = SetDoor(rightWall.transform.position, 90);
+            roomObjects.Add(obj);
+        };
+
+        if (room.DoorWest)
+        {
+            var obj = SetDoor(leftWall.transform.position, 90);
+            roomObjects.Add(obj);
+        };
+        if (room.DoorNorth)
+        {
+            var obj = SetDoor(ceiling.transform.position, 0);
+            roomObjects.Add(obj);
+        };
+        if (room.DoorSouth)
+        {
+            var obj = SetDoor(floor.transform.position, 0);
+            roomObjects.Add(obj);
+        };
+
+    }
+
+    private GameObject SetDoor(Vector2 pos, float rotation)
+    {
+        var obj = Instantiate(doorTriggerPrefab);
+        obj.transform.position = pos;
+        obj.transform.eulerAngles = new Vector3(0, 0, rotation);
+
+        return obj;
     }
 
     [ContextMenu("Unload Room")]

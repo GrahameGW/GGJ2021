@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public int health = 3;
 
     private Rigidbody2D rb;
+    private SpriteRenderer sprite;
     bool isJumping = false;
 
     public UnityIntEvent OnHealthChange;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
         if (horizontal != 0)
         {
             rb.AddForce(Vector3.right * horizontal * speed, ForceMode2D.Impulse);
+            sprite.flipX = horizontal < 0;
         }
 
         if (Input.GetAxis("Jump") > 0 && !isJumping)
