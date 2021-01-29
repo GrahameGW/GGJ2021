@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
     [SerializeField] float jump = 5f;
+    public int health = 3;
 
     private Rigidbody2D rb;
     bool isJumping = false;
+
+    public UnityIntEvent OnHealthChange;
 
     private void Awake()
     {
@@ -18,7 +21,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         if (horizontal != 0)
         {
-            transform.Translate(Vector3.right * horizontal * speed);
+            rb.AddForce(Vector3.right * horizontal * speed, ForceMode2D.Impulse);
         }
 
         if (Input.GetAxis("Jump") > 0 && !isJumping)
@@ -32,4 +35,18 @@ public class PlayerController : MonoBehaviour
     {
         isJumping = false;
     }
+
+    public void Damage(int damage)
+    {
+        health -= damage;
+        OnHealthChange.Invoke(health);
+    }
+
+    [ContextMenu("Damage")]
+    public void OneDmgDebug()
+    {
+        Damage(1);
+    }
 }
+
+
