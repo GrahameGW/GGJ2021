@@ -36,8 +36,6 @@ class UI : MonoBehaviour
         playerHealth = newHealth;
         Debug.Log($"New Player Health: {playerHealth} (Love UI)");
     }
-    
-
 }
 
 
