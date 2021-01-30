@@ -118,6 +118,8 @@ public class RoomManager : MonoBehaviour
         room.coordinates = data.coordinates;
         room.data = data;
 
+        var tilemap = Instantiate(data.TilemapPrefab, gameObj.transform);
+
         var leftWall = Instantiate(wallPrefab, gameObj.transform);
         leftWall.transform.position = new Vector2(-data.Width * 0.5f, 0);
 
@@ -163,6 +165,7 @@ public class RoomManager : MonoBehaviour
             obj.transform.parent = gameObj.transform;
             room.objects.Add(obj);
         };
+
 
         if (loadAdjacent)
         {

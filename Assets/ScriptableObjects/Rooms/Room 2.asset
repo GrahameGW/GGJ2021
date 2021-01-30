@@ -16,6 +16,11 @@ MonoBehaviour:
   Width: 16
   Height: 9
   DoorEast: 1
+  EastStart: {x: 6.75, y: 0}
   DoorWest: 0
+  WestStart: {x: -6.75, y: 0}
   DoorNorth: 0
+  NorthStart: {x: 0, y: 3.5}
   DoorSouth: 0
+  SouthStart: {x: 0, y: -3.5}
+  items: []
