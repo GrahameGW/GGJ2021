@@ -52,10 +52,4 @@ public class Player : MonoBehaviour
     }
 }
 
-[CreateAssetMenu(menuName = "Level Map")]
-public class LevelMap : ScriptableObject
-{
-    public Room[,] rooms;
-}
-
 
