@@ -33,6 +33,7 @@ public class RoomManager : MonoBehaviour
             Instance = this;
         }
 
+        GameObject.DontDestroyOnLoad(this.gameObject);
         Load(new Vector2Int(0,0));
     }
 
