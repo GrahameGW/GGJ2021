@@ -25,7 +25,7 @@ public class RoomLoader : MonoBehaviour
 
     public void Load(Vector2Int coordinates)
     {
-        room = levelMap.rooms[coordinates.x, coordinates.y];
+        room = levelMap.GetRoom(coordinates.x, coordinates.y);
         room.coordinates = coordinates; // set value so it can be found later when changing rooms
 
         Unload();
