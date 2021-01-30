@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Room")]
 public class RoomData : ScriptableObject
@@ -22,4 +23,6 @@ public class RoomData : ScriptableObject
     public Vector2 SouthStart = new Vector2(0, -3.5f);
 
     public List<ItemData> items;
+
+    public Grid TilemapPrefab;
 }
