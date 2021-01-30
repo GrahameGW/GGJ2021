@@ -4,6 +4,8 @@ public class Creature : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
     [SerializeField] float jumpHeight = 5f;
+    [SerializeField]
+    private float glideSpeed = 0f;
     public int health = 3;
 
     protected Rigidbody2D rb;
@@ -38,8 +40,16 @@ public class Creature : MonoBehaviour
     {
         if (horizontal != 0)
         {
-            transform.Translate(Vector3.right * horizontal * speed);
             sprite.flipX = horizontal < 0;
+        }
+
+        if (state == State.Gliding && rb.velocity.y < 0f && Mathf.Abs(rb.velocity.y) > glideSpeed)
+        {
+            rb.velocity = new Vector2(horizontal, Mathf.Sign(rb.velocity.y) * glideSpeed);
+        }
+        else
+        {
+            transform.Translate((horizontal * Time.deltaTime * speed), 0f, 0f);
         }
     }
 
