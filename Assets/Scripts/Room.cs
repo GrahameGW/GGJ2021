@@ -1,15 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-[CreateAssetMenu(menuName = "Room")]
-public class Room : ScriptableObject
+public class Room : MonoBehaviour
 {
+    // Container class for all game objects comprising a room
+    // Allows for easy pooling
+
     public Vector2Int coordinates;
-
-    public float Width;
-    public float Height;
-
-    public bool DoorEast;
-    public bool DoorWest;
-    public bool DoorNorth;
-    public bool DoorSouth;
+    public List<GameObject> objects = new List<GameObject>();
 }
