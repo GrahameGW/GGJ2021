@@ -2,20 +2,12 @@
 using System.Linq;
 using UnityEngine;
 
-public class RoomLoader : MonoBehaviour
+public class RoomManager : MonoBehaviour
 {
-    public static RoomLoader Instance { get; private set; }
+    public static RoomManager Instance { get; private set; }
 
-    public LevelMap levelMap;
-
-    public GameObject wallPrefab;
-    public GameObject floorPrefab;
-    public GameObject doorTriggerPrefab;
-
-    [SerializeField] Transform player = default;
-
-    private List<Room> loadedRooms = new List<Room>();
-    private Room CurrentRoom {
+    private Room CurrentRoom
+    {
         get => _currentRoom;
         set
         {
@@ -25,6 +17,13 @@ public class RoomLoader : MonoBehaviour
         }
     }
 
+    public LevelMap levelMap;
+    public Transform player;
+    public GameObject wallPrefab;
+    public GameObject floorPrefab;
+    public GameObject doorTriggerPrefab;
+
+    private List<Room> loadedRooms = new List<Room>();
     private Room _currentRoom = null;
 
     private void Awake()
@@ -37,6 +36,11 @@ public class RoomLoader : MonoBehaviour
         Load(new Vector2Int(0,0));
     }
 
+    private void Start()
+    {
+        player.position = GetRoomStart(Compass.E);
+    }
+
     public void Load(Vector2Int coordinates)
     {
         var newRoom = loadedRooms.FirstOrDefault(r => r.coordinates == coordinates);
@@ -47,11 +51,9 @@ public class RoomLoader : MonoBehaviour
             if (!data) return;
 
             newRoom = GenerateRoom(data, true);
-            loadedRooms.Add(newRoom);
         }
 
         CurrentRoom = newRoom;
-        player.position = Vector3.zero; // placeholder
     }
 
     public void MoveRooms(Compass door)
@@ -77,6 +79,19 @@ public class RoomLoader : MonoBehaviour
         if (coord != CurrentRoom.coordinates)
         {
             Load(coord);
+            player.position = GetRoomStart(door);
+        }
+    }
+
+    private Vector2 GetRoomStart(Compass comingFrom)
+    {
+        switch (comingFrom)
+        {
+            case Compass.E: return CurrentRoom.data.WestStart;
+            case Compass.W: return CurrentRoom.data.EastStart;
+            case Compass.N: return CurrentRoom.data.SouthStart;
+            case Compass.S: return CurrentRoom.data.NorthStart;
+            default: return Vector2.zero;
         }
     }
 
@@ -101,7 +116,7 @@ public class RoomLoader : MonoBehaviour
 
         var room = gameObj.GetComponent<Room>();
         room.coordinates = data.coordinates;
-
+        room.data = data;
 
         var leftWall = Instantiate(wallPrefab, gameObj.transform);
         leftWall.transform.position = new Vector2(-data.Width * 0.5f, 0);
@@ -155,6 +170,7 @@ public class RoomLoader : MonoBehaviour
         }
 
         gameObj.SetActive(false);
+        loadedRooms.Add(room);
         return room;
     }
 

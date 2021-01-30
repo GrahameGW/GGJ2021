@@ -8,4 +8,5 @@ public class Room : MonoBehaviour
 
     public Vector2Int coordinates;
     public List<GameObject> objects = new List<GameObject>();
+    public RoomData data;
 }

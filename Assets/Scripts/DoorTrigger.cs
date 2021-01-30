@@ -2,7 +2,7 @@
 
 public class DoorTrigger : MonoBehaviour
 {
-    public RoomLoader Loader { private get; set; }
+    public RoomManager Loader { private get; set; }
     public Compass Direction { private get; set; }
 
     private void OnTriggerEnter2D(Collider2D other)
