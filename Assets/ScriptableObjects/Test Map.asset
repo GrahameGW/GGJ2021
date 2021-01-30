@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e89648c2ffc8c44aaac4c60461114d5, type: 3}
   m_Name: Test Map
   m_EditorClassIdentifier: 
-  rows: []
+  rows:
+  - rooms:
+    - {fileID: 11400000, guid: c0590518c2e76d741b6e36f2561c6654, type: 2}
+    - {fileID: 11400000, guid: d6812c317711b6445a66a839c5271f40, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+  - rooms: []
+  - rooms: []
+  - rooms: []

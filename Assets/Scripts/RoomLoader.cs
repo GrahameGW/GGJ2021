@@ -53,36 +53,67 @@ public class RoomLoader : MonoBehaviour
 
         if (room.DoorEast)
         {
-            var obj = SetDoor(rightWall.transform.position, 90);
+            var obj = SetDoor(rightWall.transform.position, 90, Compass.E);
             roomObjects.Add(obj);
         };
 
         if (room.DoorWest)
         {
-            var obj = SetDoor(leftWall.transform.position, 90);
+            var obj = SetDoor(leftWall.transform.position, 90, Compass.W);
             roomObjects.Add(obj);
         };
         if (room.DoorNorth)
         {
-            var obj = SetDoor(ceiling.transform.position, 0);
+            var obj = SetDoor(ceiling.transform.position, 0, Compass.N);
             roomObjects.Add(obj);
         };
         if (room.DoorSouth)
         {
-            var obj = SetDoor(floor.transform.position, 0);
+            var obj = SetDoor(floor.transform.position, 0, Compass.S);
             roomObjects.Add(obj);
         };
 
     }
 
-    private GameObject SetDoor(Vector2 pos, float rotation)
+    public void MoveRooms(Compass door)
+    {
+        var coord = room.coordinates;
+
+        switch (door)
+        {
+            case Compass.E:
+                coord += Vector2Int.right;
+                break;
+            case Compass.N:
+                coord += Vector2Int.up;
+                break;
+            case Compass.S:
+                coord += Vector2Int.down;
+                break;
+            case Compass.W:
+                coord += Vector2Int.left;
+                break;
+        }
+
+        if (coord != room.coordinates)
+        {
+            Load(coord);
+        }
+    }
+
+    private GameObject SetDoor(Vector2 pos, float rotation, Compass dir)
     {
         var obj = Instantiate(doorTriggerPrefab);
         obj.transform.position = pos;
         obj.transform.eulerAngles = new Vector3(0, 0, rotation);
 
+        var trigger = obj.GetComponent<DoorTrigger>();
+        trigger.Direction = dir;
+        trigger.loader = this;
+
         return obj;
     }
+
 
     [ContextMenu("Unload Room")]
     private void Unload()

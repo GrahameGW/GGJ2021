@@ -2,16 +2,14 @@
 
 public class DoorTrigger : MonoBehaviour
 {
+    public RoomLoader loader { private get; set; }
     public Compass Direction { private get; set; }
 
-    public UnityIntEvent OnDoorEntered;
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.collider.gameObject.TryGetComponent(out Player player))
+        if (other.gameObject.TryGetComponent(out Player player))
         {
-            OnDoorEntered.Invoke((int)Direction);
-            OnDoorEntered.RemoveAllListeners();
+            loader.MoveRooms(Direction);
         }
     }
 }
