@@ -5,23 +5,23 @@ public class Player : Creature
 
     void Update()
     {
-        pickAction();
+        PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
     }
 
 
-    private void pickAction()
+    private void PickAction()
     {
         switch (state)
         {
             case State.Gliding:
-                if (!Input.GetKey("Jump") || onGround)
+                if (!Input.GetButtonDown("Jump") || onGround)
                 {
                     state = State.Normal;
                 }
                 break;
             case State.Normal:
-                if (Input.GetKeyDown("Jump"))
+                if (Input.GetButtonDown("Jump"))
                 {
                     if (onGround)
                     {
@@ -32,7 +32,7 @@ public class Player : Creature
                         ApplyGlide();
                     }
                 }
-                if (Input.GetKeyDown("Fire1"))
+                if (Input.GetButtonDown("Fire1"))
                 {
                     ApplyAttack();
                 }
