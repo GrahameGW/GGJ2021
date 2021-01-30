@@ -1,4 +1,5 @@
 ﻿using UnityEngine.Events;
+using System;
 
-[System.Serializable]
+[Serializable]
 public sealed class UnityIntEvent : UnityEvent<int> { }
