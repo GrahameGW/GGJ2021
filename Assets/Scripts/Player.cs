@@ -1,55 +1,49 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Creature
 {
-    [SerializeField] float speed = 1f;
-    [SerializeField] float jump = 5f;
-    public int health = 3;
-
-    private Rigidbody2D rb;
-    private SpriteRenderer sprite;
-    bool isJumping = false;
-
-    public UnityIntEvent OnHealthChange;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
-    }
 
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        if (horizontal != 0)
+        pickAction();
+        ApplyMovement(Input.GetAxis("Horizontal"));
+    }
+
+
+    private void pickAction()
+    {
+        switch (state)
         {
-            transform.Translate(Vector3.right * horizontal * speed);
-            sprite.flipX = horizontal < 0;
+            case State.Gliding:
+                if (!Input.GetKey("Jump") || onGround)
+                {
+                    state = State.Normal;
+                }
+                break;
+            case State.Normal:
+                if (Input.GetKeyDown("Jump"))
+                {
+                    if (onGround)
+                    {
+                        ApplyJump();
+                    }
+                    else
+                    {
+                        ApplyGlide();
+                    }
+                }
+                if (Input.GetKeyDown("Fire1"))
+                {
+                    ApplyAttack();
+                }
+                break;
+            default:
+                if (stateDelay == 0)
+                {
+                    state = State.Normal;
+                }
+                break;
         }
-
-        if (Input.GetAxis("Jump") > 0 && !isJumping)
-        {
-            rb.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
-            isJumping = true;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        isJumping = false;
-    }
-
-    public void Damage(int damage)
-    {
-        health -= damage;
-        OnHealthChange.Invoke(health);
-    }
-
-    [ContextMenu("Damage")]
-    public void OneDmgDebug()
-    {
-        Damage(1);
     }
 }
-
 
