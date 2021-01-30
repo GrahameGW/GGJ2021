@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         if (horizontal != 0)
         {
-            rb.AddForce(Vector3.right * horizontal * speed, ForceMode2D.Impulse);
+            transform.Translate(Vector3.right * horizontal * speed);
             sprite.flipX = horizontal < 0;
         }
 
@@ -50,6 +50,12 @@ public class Player : MonoBehaviour
     {
         Damage(1);
     }
+}
+
+[CreateAssetMenu(menuName = "Level Map")]
+public class LevelMap : ScriptableObject
+{
+    public Room[,] rooms;
 }
 
 

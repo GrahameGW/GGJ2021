@@ -4,6 +4,8 @@ using UnityEngine;
 public class RoomLoader : MonoBehaviour
 {
     public static RoomLoader Instance { get; private set; }
+    public LevelMap levelMap;
+
     public Room room;
     public GameObject wallPrefab;
     public GameObject floorPrefab;
@@ -18,12 +20,14 @@ public class RoomLoader : MonoBehaviour
             Instance = this;
         }
 
-        Load();
+        Load(new Vector2Int(0,0));
     }
 
-    [ContextMenu("Load Room")]
-    public void Load()
+    public void Load(Vector2Int coordinates)
     {
+        room = levelMap.rooms[coordinates.x, coordinates.y];
+        room.coordinates = coordinates; // set value so it can be found later when changing rooms
+
         Unload();
 
         var leftWall = Instantiate(wallPrefab);
