@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Room 2
   m_EditorClassIdentifier: 
   coordinates: {x: 0, y: 0}
-  Width: 0
-  Height: 0
-  DoorEast: 0
-  DoorWest: 1
+  Width: 16
+  Height: 9
+  DoorEast: 1
+  DoorWest: 0
   DoorNorth: 0
   DoorSouth: 0
