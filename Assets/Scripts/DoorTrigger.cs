@@ -2,14 +2,13 @@
 
 public class DoorTrigger : MonoBehaviour
 {
-    public RoomManager Loader { private get; set; }
-    public Compass Direction { private get; set; }
+    public Compass Direction;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            Loader.MoveRooms(Direction);
+            RoomManager.Instance.MoveRooms(Direction);
         }
     }
 }

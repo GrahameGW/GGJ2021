@@ -24,6 +24,7 @@ public class RoomManager : MonoBehaviour
     public GameObject doorTriggerPrefab;
 
     private List<Room> loadedRooms = new List<Room>();
+    private List<DoorTrigger> doors = new List<DoorTrigger>();
     private Room _currentRoom = null;
 
     private void Awake()
@@ -34,11 +35,6 @@ public class RoomManager : MonoBehaviour
         }
 
         Load(new Vector2Int(0,0));
-    }
-
-    private void Start()
-    {
-        player.position = GetRoomStart(Compass.E);
     }
 
     public void Load(Vector2Int coordinates)
@@ -95,19 +91,6 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private GameObject SetDoor(Vector2 pos, float rotation, Compass dir)
-    {
-        var obj = Instantiate(doorTriggerPrefab);
-        obj.transform.position = pos;
-        obj.transform.eulerAngles = new Vector3(0, 0, rotation);
-
-        var trigger = obj.GetComponent<DoorTrigger>();
-        trigger.Direction = dir;
-        trigger.Loader = this;
-
-        return obj;
-    }
-
     private Room GenerateRoom(RoomData data, bool loadAdjacent = false)
     {
         var gameObj = new GameObject();
@@ -119,53 +102,6 @@ public class RoomManager : MonoBehaviour
         room.data = data;
 
         var tilemap = Instantiate(data.TilemapPrefab, gameObj.transform);
-
-        var leftWall = Instantiate(wallPrefab, gameObj.transform);
-        leftWall.transform.position = new Vector2(-data.Width * 0.5f, 0);
-
-        var rightWall = Instantiate(wallPrefab, gameObj.transform);
-        rightWall.transform.position = new Vector2(data.Width * 0.5f, 0);
-
-        var floor = Instantiate(floorPrefab, gameObj.transform);
-        floor.transform.position = new Vector2(0, -data.Height * 0.5f);
-
-        var ceiling = Instantiate(floorPrefab, gameObj.transform);
-        ceiling.transform.position = new Vector2(0, data.Height * 0.5f);
-
-        room.objects.AddRange(new List<GameObject>()
-            {
-                leftWall,
-                rightWall,
-                floor,
-                ceiling
-            });
-
-        if (data.DoorEast)
-        {
-            var obj = SetDoor(rightWall.transform.position, 90, Compass.E);
-            obj.transform.parent = gameObj.transform;
-            room.objects.Add(obj);
-        };
-
-        if (data.DoorWest)
-        {
-            var obj = SetDoor(leftWall.transform.position, 90, Compass.W);
-            obj.transform.parent = gameObj.transform;
-            room.objects.Add(obj);
-        };
-        if (data.DoorNorth)
-        {
-            var obj = SetDoor(ceiling.transform.position, 0, Compass.N);
-            obj.transform.parent = gameObj.transform;
-            room.objects.Add(obj);
-        };
-        if (data.DoorSouth)
-        {
-            var obj = SetDoor(floor.transform.position, 0, Compass.S);
-            obj.transform.parent = gameObj.transform;
-            room.objects.Add(obj);
-        };
-
 
         if (loadAdjacent)
         {
@@ -181,45 +117,20 @@ public class RoomManager : MonoBehaviour
     {
         var coord = current.coordinates;
 
-        if (current.DoorEast)
+        var newCoords = new List<Vector2Int>() {
+             new Vector2Int(coord.x + 1, coord.y),
+             new Vector2Int(coord.x - 1, coord.y),
+             new Vector2Int(coord.x, coord.y + 1),
+             new Vector2Int(coord.x, coord.y - 1)
+        };
+
+        for (int i = 0; i < newCoords.Count; i++)
         {
-            var newCoord = new Vector2Int(coord.x + 1, coord.y);
-            if (!loadedRooms.Any(r => r.coordinates == newCoord))
-            {
-                var data = levelMap.GetRoomData(newCoord);
+            if (!loadedRooms.Any(r => r.coordinates == newCoords[i])) {
+                var data = levelMap.GetRoomData(newCoords[i]);
                 if (!data) return;
                 GenerateRoom(data);
             }
-        };
-        if (current.DoorWest)
-        {
-            var newCoord = new Vector2Int(coord.x - 1, coord.y);
-            if (!loadedRooms.Any(r => r.coordinates == newCoord))
-            {
-                var data = levelMap.GetRoomData(newCoord);
-                if (!data) return;
-                GenerateRoom(data);
-            }
-        };
-        if (current.DoorNorth)
-        {
-            var newCoord = new Vector2Int(coord.x, coord.y + 1);
-            if (!loadedRooms.Any(r => r.coordinates == newCoord))
-            {
-                var data = levelMap.GetRoomData(newCoord);
-                if (!data) return;
-                GenerateRoom(data);
-            }
-        };
-        if (current.DoorSouth)
-        {
-            var newCoord = new Vector2Int(coord.x, coord.y - 1);
-            if (!loadedRooms.Any(r => r.coordinates == newCoord))
-            {
-                var data = levelMap.GetRoomData(newCoord);
-                if (!data) return;
-                GenerateRoom(data);
-            }
-        };
+        }
     }
 }

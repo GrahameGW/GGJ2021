@@ -7,11 +7,11 @@ public class LevelMap : ScriptableObject
 
     public RoomData GetRoomData(Vector2Int coord)
     {
-        if (coord.y < rows.Length)
+        if (coord.y < rows.Length && coord.y >= 0)
         {
             var rooms = rows[coord.y].rooms;
 
-            if (coord.x < rooms.Length)
+            if (coord.x < rooms.Length && coord.x >= 0)
             {
                 var room = rooms[coord.x];
                 room.coordinates = coord;
