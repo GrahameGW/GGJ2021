@@ -3,6 +3,8 @@
 [CreateAssetMenu(menuName = "Room")]
 public class Room : ScriptableObject
 {
+    public Vector2Int coordinates;
+
     public float Width;
     public float Height;
 
