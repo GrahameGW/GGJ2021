@@ -22,12 +22,18 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        audio.Play();
+        if (audio.clip != null)
+        {
+            audio.Play();
+        }
     }
 
     private void OnDisable()
     {
-        audio.Stop();
+        if (audio.isPlaying)
+        {
+            audio.Stop();
+        }
     }
 
     public void SpawnItems()
