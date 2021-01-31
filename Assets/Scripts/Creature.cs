@@ -64,7 +64,6 @@ public class Creature : MonoBehaviour {
         }
 
         animator.SetBool("moving", horizontal != 0);
-        Debug.Log(animator.speed);
     }
 
 
@@ -73,10 +72,14 @@ public class Creature : MonoBehaviour {
         state = State.Jumping;
         stateDelay = jumpDelay;
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+        animator.SetTrigger("jumping");
+        animator.ResetTrigger("jumping");
     }
 
     protected void EndJump() {
         state = State.Normal;
+        animator.SetTrigger("landing");
+        animator.ResetTrigger("landing");
     }
 
     protected void ApplyGlide() {
@@ -117,7 +120,7 @@ public class Creature : MonoBehaviour {
     }
 
 
-    public void Damage(int damage) {
+    public virtual void Damage(int damage) {
         health -= damage;
         OnHealthChange.Invoke();
     }
