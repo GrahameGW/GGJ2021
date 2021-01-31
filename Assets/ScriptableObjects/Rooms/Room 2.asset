@@ -13,10 +13,5 @@ MonoBehaviour:
   m_Name: Room 2
   m_EditorClassIdentifier: 
   coordinates: {x: 0, y: 0}
-  DistanceLoadingFromDoor: 2
-  WestStart: {x: -6.75, y: 0}
-  EastStart: {x: 6.75, y: 0}
-  NorthStart: {x: 0, y: 3.5}
-  SouthStart: {x: 0, y: -3.5}
-  items: []
   TilemapPrefab: {fileID: 6265400580183114711, guid: feb943ccd5d56c14e8a9499b1e13910b, type: 3}
+  Ambience: {fileID: 8300000, guid: f58c66e6b16b6484590006862df33b21, type: 3}

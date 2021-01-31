@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5527bd582451144287b6557b786dbfe, type: 3}
   m_Name: EnemySounds
   m_EditorClassIdentifier: 
-  AttackClip: {fileID: 0}
-  JumpClip: {fileID: 0}
-  LandingClip: {fileID: 0}
-  MovementClip: {fileID: 0}
+  AttackClip: {fileID: 8300000, guid: c5a6b508dc0440141bd8f1c9b1ed635b, type: 3}
+  JumpClip: {fileID: 8300000, guid: cb6cc12dd0c7a9245a9e4a9e13216e7d, type: 3}
+  LandingClip: {fileID: 8300000, guid: cb6cc12dd0c7a9245a9e4a9e13216e7d, type: 3}
+  MovementClip: {fileID: 8300000, guid: 21a73f300e199ae49aba1b1e443afd1c, type: 3}
   DamagedClip: {fileID: 0}
   DeathClip: {fileID: 0}
