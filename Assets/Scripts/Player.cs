@@ -77,5 +77,13 @@ public class Player : Creature {
         string newItem = HeldItem?.name;
         OnItemChanged.Invoke(name);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<PatrolEnemy>())
+        {
+            Kill();
+        }
+    }
 }
 

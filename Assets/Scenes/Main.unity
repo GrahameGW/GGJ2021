@@ -786,8 +786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpHeight: 5
-  glideSpeed: 5
+  jumpHeight: 10
+  glideSpeed: 0.5
   attackDmg: 1
   attackFab: {fileID: 4852598501139348872, guid: 4f03e82f084e83d4284fba4efcc16e4b, type: 3}
   attackOffest: {x: 0, y: 0, z: 0}
@@ -795,9 +795,11 @@ MonoBehaviour:
   health: 3
   jumpDelay: 3
   attackDelay: 5
+  state: 0
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
+  animator: {fileID: 0}
   HeldItem: {fileID: 0}
   OnItemChanged:
     m_PersistentCalls:
@@ -844,7 +846,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: d3c01b7824838e34bb9a8f5a2433e305, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
