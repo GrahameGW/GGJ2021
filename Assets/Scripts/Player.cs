@@ -19,7 +19,7 @@ public class Player : Creature {
                             ApplyGlide();
                         }
                     }
-                    if (Input.GetButtonDown("Fire1")) {
+                    if (Input.GetButtonDown("Attack")) {
                         ApplyAttack();
                     }
                     break;
