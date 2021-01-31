@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5527bd582451144287b6557b786dbfe, type: 3}
+  m_Name: PlayerSounds
+  m_EditorClassIdentifier: 
+  AttackClip: {fileID: 8300000, guid: 20779d6a9b5ef0b40a0fd30346fdb817, type: 3}
+  JumpClip: {fileID: 8300000, guid: cb6cc12dd0c7a9245a9e4a9e13216e7d, type: 3}
+  LandingClip: {fileID: 8300000, guid: cb6cc12dd0c7a9245a9e4a9e13216e7d, type: 3}
+  MovementClip: {fileID: 8300000, guid: 804f5075f9845d642aa8c442ea77282a, type: 3}
+  DamagedClip: {fileID: 0}
+  DeathClip: {fileID: 8300000, guid: c0a99043230b7ee44b6c94a686e20191, type: 3}

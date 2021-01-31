@@ -120,7 +120,7 @@ public class RoomManager : MonoBehaviour
 
         var room = gameObj.GetComponent<Room>();
         room.coordinates = data.coordinates;
-        room.data = data;
+        room.Data = data;
 
         var tilemap = Instantiate(data.TilemapPrefab, gameObj.transform);
         room.entryPoints = tilemap.GetComponentsInChildren<RoomEntryPoint>();
@@ -159,6 +159,6 @@ public class RoomManager : MonoBehaviour
 
     public void BuryItem(ItemData item)
     {
-        CurrentRoom.data.items.Add(new Tuple<ItemData, Vector2>(item, player.position));
+        CurrentRoom.Data.items.Add(new Tuple<ItemData, Vector2>(item, player.position));
     }
 }

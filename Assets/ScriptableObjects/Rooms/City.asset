@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coordinates: {x: 0, y: 0}
   TilemapPrefab: {fileID: 1048539815285937420, guid: 9fd47c79c026e904aa0b94e1d71567a7, type: 3}
+  Ambience: {fileID: 8300000, guid: e67c605441637f3488f8bfffc39e871d, type: 3}

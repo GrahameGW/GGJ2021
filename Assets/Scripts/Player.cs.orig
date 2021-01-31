@@ -3,9 +3,14 @@
 public class Player : Creature {
 
     public ItemData HeldItem;
+<<<<<<< HEAD
+    public AudioSource MovementSound;
+=======
+
     public UnityStringEvent OnItemChanged;
     public UnityIntEvent OnHealthChangedUI;
 
+>>>>>>> main
     void Update() {
         PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
@@ -22,6 +27,7 @@ public class Player : Creature {
             switch (state) {
                 case State.Normal: // can init action
                     if (Input.GetButtonDown("Jump")) {
+                          MovementSound.Play();
                         if (onGround) {
                             ApplyJump();
                         } else {
@@ -86,4 +92,3 @@ public class Player : Creature {
         }
     }
 }
-

@@ -11,4 +11,6 @@ public class RoomData : ScriptableObject
     public List<Tuple<ItemData, Vector2>> items;
 
     public Grid TilemapPrefab;
+
+    public AudioClip Ambience;
 }
