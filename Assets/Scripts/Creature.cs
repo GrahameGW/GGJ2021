@@ -21,14 +21,14 @@ public class Creature : MonoBehaviour {
 
 
 
-    protected enum State {
+    public enum State {
         Normal,
         Jumping,
         Gliding,
         Attacking
     }
 
-    protected State state = State.Normal;
+    public State state = State.Normal;
     protected Rigidbody2D rb;
     protected SpriteRenderer sprite;
     protected bool onGround;
@@ -39,7 +39,7 @@ public class Creature : MonoBehaviour {
 
     public UnityEvent OnHealthChange;
 
-    private Animator animator;
+    public Animator animator;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -76,7 +76,7 @@ public class Creature : MonoBehaviour {
         animator.SetTrigger("jumping");
     }
 
-    protected void EndJump() {
+    public void EndJump() {
         if (onGround)
         {
             state = State.Normal;
@@ -98,7 +98,7 @@ public class Creature : MonoBehaviour {
     }
     Coroutine gravityDelayCoroutine;
 
-    protected void EndGlide() {
+    public void EndGlide() {
         if (onGround)
         {
             state = State.Normal;

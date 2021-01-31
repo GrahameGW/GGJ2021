@@ -15,7 +15,7 @@ MonoBehaviour:
   rows:
   - rooms:
     - {fileID: 11400000, guid: 3bdc56e72ff44204f9b71903398f26fc, type: 2}
-    - {fileID: 11400000, guid: d6812c317711b6445a66a839c5271f40, type: 2}
+    - {fileID: 11400000, guid: 7ed6091d954ddb24ca93c0493cd3ad7f, type: 2}
     - {fileID: 0}
     - {fileID: 0}
   - rooms: []

@@ -63,6 +63,11 @@ public class RoomManager : MonoBehaviour
 
         CurrentRoom = newRoom;
         OnRoomLoaded?.Invoke();
+        var c = player.GetComponent<Creature>();
+        c.state = Creature.State.Normal;
+        c.EndGlide();
+        c.EndJump();
+        c.animator.SetTrigger("landing");
     }
 
     public void MoveRooms(Compass door)
