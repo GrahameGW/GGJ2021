@@ -1030,6 +1030,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2238465123765385670, guid: 07b77d8ca2810954c87c506eae8f841e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2238465124401672904, guid: 07b77d8ca2810954c87c506eae8f841e, type: 3}
       propertyPath: m_Name
       value: Factory
