@@ -123,7 +123,7 @@ public class Creature : MonoBehaviour {
         attackObj = Instantiate(attackFab, pos, transform.rotation);
        
         AttackData data = attackObj.GetComponent<AttackData>();
-        data.SetOwner(this.GetInstanceID());
+        data.SetOwner(this.gameObject.GetInstanceID());
         data.SetDmg(attackDmg);
 
         animator.SetTrigger("attack");
