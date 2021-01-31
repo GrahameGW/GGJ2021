@@ -40,11 +40,13 @@ public class Player : Creature {
                     break;
                 case State.Jumping:
                     EndJump();
+                    if (Input.GetButtonDown("Jump"))
+                    {
+                        ApplyGlide();
+                    }
                     break;
                 case State.Gliding:
-                    if (!Input.GetButtonDown("Jump") || onGround) {
-                        EndGlide();
-                    }
+                    EndGlide();
                     break;
                 case State.Attacking:
                     EndAttack();

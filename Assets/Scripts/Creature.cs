@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class Creature : MonoBehaviour {
@@ -73,23 +74,38 @@ public class Creature : MonoBehaviour {
         stateDelay = jumpDelay;
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
         animator.SetTrigger("jumping");
-        animator.ResetTrigger("jumping");
     }
 
     protected void EndJump() {
-        state = State.Normal;
-        animator.SetTrigger("landing");
-        animator.ResetTrigger("landing");
+        if (onGround)
+        {
+            state = State.Normal;
+            animator.SetTrigger("landing");
+        }
     }
 
     protected void ApplyGlide() {
         Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) glides.");
         state = State.Gliding;
-        //TODO
+       rb.AddForce(new Vector2(0f, jumpHeight * 0.5f), ForceMode2D.Impulse); // double-jump
+        gravityDelayCoroutine = StartCoroutine(GlideGravityDelay());
+        animator.SetTrigger("jumping");
     }
 
+    IEnumerator GlideGravityDelay() {
+        yield return new WaitForSeconds(0.3f);
+        rb.gravityScale = glideSpeed;
+    }
+    Coroutine gravityDelayCoroutine;
+
     protected void EndGlide() {
-        state = State.Normal;
+        if (onGround)
+        {
+            state = State.Normal;
+            rb.gravityScale = 1;
+            animator.SetTrigger("landing");
+            StopCoroutine(gravityDelayCoroutine);
+        }
     }
 
     protected void ApplyAttack() {
@@ -98,7 +114,7 @@ public class Creature : MonoBehaviour {
         stateDelay = attackDelay;
 
         Vector3 pos = this.gameObject.transform.position;
-        if (sprite.flipX) {
+        if (!sprite.flipX) {
             pos -= attackOffest;
         } else {
             pos += attackOffest;
@@ -111,7 +127,6 @@ public class Creature : MonoBehaviour {
         data.SetDmg(attackDmg);
 
         animator.SetTrigger("attack");
-        animator.ResetTrigger("attack");
     }
 
     protected void EndAttack() {

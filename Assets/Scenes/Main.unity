@@ -787,7 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpHeight: 5
-  glideSpeed: 0
+  glideSpeed: 5
   attackDmg: 1
   attackFab: {fileID: 4852598501139348872, guid: 4f03e82f084e83d4284fba4efcc16e4b, type: 3}
   attackOffest: {x: 0, y: 0, z: 0}
@@ -800,6 +800,9 @@ MonoBehaviour:
       m_Calls: []
   HeldItem: {fileID: 0}
   OnItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealthChangedUI:
     m_PersistentCalls:
       m_Calls: []
 --- !u!212 &1805311920
