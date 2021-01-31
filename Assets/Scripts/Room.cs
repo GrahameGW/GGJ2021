@@ -11,7 +11,24 @@ public class Room : MonoBehaviour
     public RoomEntryPoint[] entryPoints;
     public RoomData data;
     private bool itemSpawned = false;
+    private AudioSource audio;
 
+
+    private void Awake()
+    {
+        audio = gameObject.AddComponent<AudioSource>();
+        audio.clip = data.Ambience;
+    }
+
+    private void Start()
+    {
+        audio.Play();
+    }
+
+    private void OnDisable()
+    {
+        audio.Stop();
+    }
 
     public void SpawnItems()
     {

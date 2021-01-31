@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AudioSource))]
 public class Creature : MonoBehaviour {
     [SerializeField] float speed = 1f;
     [SerializeField] float jumpHeight = 5f;
@@ -18,7 +19,10 @@ public class Creature : MonoBehaviour {
     public int attackDelay = 5;
     //public int glideDelay = 0;
 
+    [SerializeField]
+    private CreatureSoundData soundData;
 
+    private AudioSource audio;
 
     protected enum State {
         Normal,
@@ -46,6 +50,7 @@ public class Creature : MonoBehaviour {
         }
         OnHealthChange.AddListener(UpdateHealth);
 
+        audio = GetComponent<AudioSource>();
     }
 
 
@@ -59,6 +64,8 @@ public class Creature : MonoBehaviour {
         } else {
             transform.Translate((horizontal * Time.deltaTime * speed), 0f, 0f);
         }
+
+        PlayAudio(soundData.MovementClip);
     }
 
 
@@ -67,10 +74,12 @@ public class Creature : MonoBehaviour {
         state = State.Jumping;
         stateDelay = jumpDelay;
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+        PlayAudio(soundData.JumpClip);
     }
 
     protected void EndJump() {
         state = State.Normal;
+        PlayAudio(soundData.LandingClip);
     }
 
     protected void ApplyGlide() {
@@ -81,6 +90,7 @@ public class Creature : MonoBehaviour {
 
     protected void EndGlide() {
         state = State.Normal;
+        PlayAudio(soundData.LandingClip);
     }
 
     protected void ApplyAttack() {
@@ -100,6 +110,8 @@ public class Creature : MonoBehaviour {
         AttackData data = attackObj.GetComponent<AttackData>();
         data.SetOwner(this.GetInstanceID());
         data.SetDmg(attackDmg);
+
+        PlayAudio(soundData.AttackClip);
     }
 
     protected void EndAttack() {
@@ -111,6 +123,7 @@ public class Creature : MonoBehaviour {
     public void Damage(int damage) {
         health -= damage;
         OnHealthChange.Invoke();
+        PlayAudio(soundData.DamagedClip);
     }
 
     [ContextMenu("Kill")]
@@ -138,6 +151,7 @@ public class Creature : MonoBehaviour {
         Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) has died.");
         //TODO: on death stuff
         Destroy(this.transform.parent);
+        PlayAudio(soundData.DeathClip);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -154,6 +168,17 @@ public class Creature : MonoBehaviour {
                 onGround = false;
                 break;
         }
+    }
+
+    private void PlayAudio(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            return;
+        }
+
+        audio.clip = clip;
+        audio.Play();
     }
 
 }
