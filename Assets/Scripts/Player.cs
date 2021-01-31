@@ -5,12 +5,18 @@ public class Player : Creature {
     public ItemData HeldItem;
 
     public UnityStringEvent OnItemChanged;
+    public UnityIntEvent OnHealthChangedUI;
 
     void Update() {
         PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
     }
 
+    public override void Damage(int damage)
+    {
+        health -= damage;
+        OnHealthChangedUI.Invoke(health);
+    }
 
     private void PickAction() {
         if (stateDelay <= 0) {
