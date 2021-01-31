@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
+    public delegate void RoomLoadDelegate();
+    public event RoomLoadDelegate OnRoomLoaded;
+
+
     public static RoomManager Instance { get; private set; }
 
     private Room CurrentRoom
@@ -56,6 +61,7 @@ public class RoomManager : MonoBehaviour
         }
 
         CurrentRoom = newRoom;
+        OnRoomLoaded?.Invoke();
     }
 
     public void MoveRooms(Compass door)
@@ -83,6 +89,13 @@ public class RoomManager : MonoBehaviour
             Load(coord);
             player.position = GetRoomStart(door.Opposite());
         }
+    }
+
+    public Bounds GetBoundsOfCurrentRoom()
+    {
+        Tilemap tilemap = CurrentRoom.GetComponentInChildren<Tilemap>();
+
+        return tilemap.localBounds;
     }
 
     private Vector2 GetRoomStart(Compass comingFrom)
