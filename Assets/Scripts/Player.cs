@@ -3,7 +3,7 @@
 public class Player : Creature {
 
     public ItemData HeldItem;
-
+    public AudioSource MovementSound;
     void Update() {
         PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
@@ -15,11 +15,13 @@ public class Player : Creature {
             switch (state) {
                 case State.Normal: // can init action
                     if (Input.GetButtonDown("Jump")) {
+                          MovementSound.Play();
                         if (onGround) {
                             ApplyJump();
                         } else {
                             ApplyGlide();
                         }
+                        
                     }
                     if (Input.GetButtonDown("Fire1")) {
                         ApplyAttack();
@@ -64,4 +66,3 @@ public class Player : Creature {
         }
     }
 }
-
