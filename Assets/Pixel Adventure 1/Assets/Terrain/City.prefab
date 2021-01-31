@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048539815285937427}
   - component: {fileID: 1048539815285937420}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: City
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 1048539815434635275}
   - component: {fileID: 1048539815434635273}
   - component: {fileID: 1048539815434635274}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 1048539815553591214}
   - component: {fileID: 1048539815553591212}
   - component: {fileID: 1048539815553591213}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BuildingProps2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 1048539815664406839}
   - component: {fileID: 1048539815664406837}
   - component: {fileID: 1048539815664406838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StreetProps2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 1048539815672620678}
   - component: {fileID: 1048539815672620676}
   - component: {fileID: 1048539815672620677}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StreetBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1350,7 +1350,7 @@ GameObject:
   - component: {fileID: 1048539815800943851}
   - component: {fileID: 1048539815800943849}
   - component: {fileID: 1048539815800943850}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Buildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 1048539815949392497}
   - component: {fileID: 1048539815949392503}
   - component: {fileID: 1048539815949392496}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BuildingProps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1885,7 +1885,7 @@ GameObject:
   - component: {fileID: 1048539816010442100}
   - component: {fileID: 1048539816010442106}
   - component: {fileID: 1048539816010442107}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StreetProps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2105,7 +2105,7 @@ GameObject:
   - component: {fileID: 1048539816167828504}
   - component: {fileID: 1048539816167828510}
   - component: {fileID: 1048539816167828511}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BrokenGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2442,7 +2442,7 @@ GameObject:
   - component: {fileID: 1048539816346429825}
   - component: {fileID: 1048539816346429831}
   - component: {fileID: 1048539816346429824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2606,7 +2606,7 @@ GameObject:
   - component: {fileID: 1048539816510107340}
   - component: {fileID: 1048539816510107346}
   - component: {fileID: 1048539816510107347}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Planters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2770,7 +2770,7 @@ GameObject:
   - component: {fileID: 1048539816601912402}
   - component: {fileID: 1048539816601912400}
   - component: {fileID: 1048539816601912401}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TreeTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2930,7 +2930,7 @@ GameObject:
   - component: {fileID: 1048539816749831507}
   - component: {fileID: 1048539816749831505}
   - component: {fileID: 1048539816749831506}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3094,7 +3094,7 @@ GameObject:
   - component: {fileID: 1048539816766329839}
   - component: {fileID: 1048539816766329837}
   - component: {fileID: 1048539816766329838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3264,7 +3264,7 @@ GameObject:
   - component: {fileID: 1048539816898594848}
   - component: {fileID: 1048539816898594849}
   - component: {fileID: 1048539816898594855}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Street
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3967,7 +3967,7 @@ GameObject:
   - component: {fileID: 1048539817028214748}
   - component: {fileID: 1048539817028214690}
   - component: {fileID: 1048539817028214691}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4148,6 +4148,10 @@ PrefabInstance:
     - target: {fileID: 1746505684430502808, guid: 26c2877085818dd429ab272500b52ac7, type: 3}
       propertyPath: m_Name
       value: WestEntry
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746505684430502808, guid: 26c2877085818dd429ab272500b52ac7, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9086461906653355356, guid: 26c2877085818dd429ab272500b52ac7, type: 3}
       propertyPath: m_LocalPosition.x
