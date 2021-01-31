@@ -8,5 +8,26 @@ public class Room : MonoBehaviour
 
     public Vector2Int coordinates;
     public List<GameObject> objects = new List<GameObject>();
+    public RoomEntryPoint[] entryPoints;
     public RoomData data;
+    private bool itemSpawned = false;
+
+
+    public void SpawnItems()
+    {
+        if (data.items == null) return;
+
+        for (int i = 0; i < data.items.Count; i++)
+        {
+            if (itemSpawned) return;
+
+            if (Random.Range(0, 2) == 1)
+            {
+                var tuple = data.items[i]; // Tuple<ItemData, Vector2>
+                var obj = Instantiate(tuple.Item1.storedPrefab, transform);
+                obj.transform.position = tuple.Item2;
+                itemSpawned = true;
+            }
+        }
+    }
 }

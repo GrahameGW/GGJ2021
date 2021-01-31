@@ -4,4 +4,5 @@
 public class ItemData : ScriptableObject
 {
     public string Name;
+    public GameObject storedPrefab;
 }
