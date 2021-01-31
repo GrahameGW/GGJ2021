@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomManager : MonoBehaviour
 {
@@ -92,12 +93,9 @@ public class RoomManager : MonoBehaviour
 
     public Bounds GetBoundsOfCurrentRoom()
     {
-        RoomData roomData = CurrentRoom.data;
+        Tilemap tilemap = CurrentRoom.GetComponentInChildren<Tilemap>();
 
-        float width = roomData.EastStart.x - roomData.WestStart.x;
-        float height = roomData.NorthStart.y - roomData.SouthStart.y;
-
-        return new Bounds(Vector2.zero, new Vector2(width, height));
+        return tilemap.localBounds;
     }
 
     private Vector2 GetRoomStart(Compass comingFrom)

@@ -52,6 +52,8 @@ public class CameraTrackingControl : MonoBehaviour
         float yMin = roomBounds.min.y;
         float yMax = roomBounds.max.y;
 
+        Debug.Log(roomBounds);
+
         Vector3 clampedTarget = new Vector3();
         clampedTarget.x = Mathf.Clamp(TargetToTrack.position.x, xMin, xMax);
         clampedTarget.y = Mathf.Clamp(TargetToTrack.position.y, yMin, yMax);
