@@ -9,7 +9,6 @@ public class RoomManager : MonoBehaviour
     public delegate void RoomLoadDelegate();
     public event RoomLoadDelegate OnRoomLoaded;
 
-
     public static RoomManager Instance { get; private set; }
 
     private Room CurrentRoom
@@ -25,9 +24,6 @@ public class RoomManager : MonoBehaviour
 
     public LevelMap levelMap;
     public Transform player;
-    public GameObject wallPrefab;
-    public GameObject floorPrefab;
-    public GameObject doorTriggerPrefab;
 
     private List<Room> loadedRooms = new List<Room>();
     private List<DoorTrigger> doors = new List<DoorTrigger>();
