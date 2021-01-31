@@ -27,7 +27,7 @@ public class Creature : MonoBehaviour {
         Attacking
     }
 
-    protected State state;
+    protected State state = State.Normal;
     protected Rigidbody2D rb;
     protected SpriteRenderer sprite;
     protected bool onGround;
@@ -43,9 +43,9 @@ public class Creature : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
         if (OnHealthChange is null) {
             OnHealthChange = new UnityEvent();
-            OnHealthChange.AddListener(UpdateHealth);
         }
-        
+        OnHealthChange.AddListener(UpdateHealth);
+
     }
 
 
@@ -88,9 +88,11 @@ public class Creature : MonoBehaviour {
         state = State.Attacking;
         stateDelay = attackDelay;
 
-        Vector3 pos = transform.position + attackOffest;
+        Vector3 pos = this.gameObject.transform.position;
         if (sprite.flipX) {
-            pos = Vector3.Reflect(pos, transform.position);
+            pos -= attackOffest;
+        } else {
+            pos += attackOffest;
         }
 
         attackObj = Instantiate(attackFab, pos, transform.rotation);
