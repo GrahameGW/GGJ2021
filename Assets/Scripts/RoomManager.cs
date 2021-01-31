@@ -39,7 +39,12 @@ public class RoomManager : MonoBehaviour
         }
 
         GameObject.DontDestroyOnLoad(this.gameObject);
-        Load(new Vector2Int(0,0));
+    }
+
+    private void Start()
+    {
+        Load(new Vector2Int(0, 0));
+        player.position = GetRoomStart(Compass.W);
     }
 
     public void Load(Vector2Int coordinates)
@@ -81,7 +86,7 @@ public class RoomManager : MonoBehaviour
         if (coord != CurrentRoom.coordinates)
         {
             Load(coord);
-            player.position = GetRoomStart(door);
+            player.position = GetRoomStart(door.Opposite());
         }
     }
 
@@ -97,14 +102,14 @@ public class RoomManager : MonoBehaviour
 
     private Vector2 GetRoomStart(Compass comingFrom)
     {
-        switch (comingFrom)
+        RoomEntryPoint entry = CurrentRoom.entryPoints.FirstOrDefault(ep => ep.arrivalDirection == comingFrom);
+
+        if (entry)
         {
-            case Compass.E: return CurrentRoom.data.WestStart;
-            case Compass.W: return CurrentRoom.data.EastStart;
-            case Compass.N: return CurrentRoom.data.SouthStart;
-            case Compass.S: return CurrentRoom.data.NorthStart;
-            default: return Vector2.zero;
+            return entry.transform.position;
         }
+
+        return Vector2.zero;
     }
 
     private Room GenerateRoom(RoomData data, bool loadAdjacent = false)
@@ -118,6 +123,7 @@ public class RoomManager : MonoBehaviour
         room.data = data;
 
         var tilemap = Instantiate(data.TilemapPrefab, gameObj.transform);
+        room.entryPoints = tilemap.GetComponentsInChildren<RoomEntryPoint>();
 
         if (loadAdjacent)
         {
@@ -126,6 +132,7 @@ public class RoomManager : MonoBehaviour
 
         gameObj.SetActive(false);
         loadedRooms.Add(room);
+        room.SpawnItems();
         return room;
     }
 

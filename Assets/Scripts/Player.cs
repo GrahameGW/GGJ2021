@@ -1,49 +1,47 @@
 ﻿using UnityEngine;
 
-public class Player : Creature
-{
+public class Player : Creature {
 
-    void Update()
-    {
+    void Update() {
         PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
     }
 
 
-    private void PickAction()
-    {
-        switch (state)
-        {
-            case State.Gliding:
-                if (!Input.GetButtonDown("Jump") || onGround)
-                {
-                    state = State.Normal;
-                }
-                break;
-            case State.Normal:
-                if (Input.GetButtonDown("Jump"))
-                {
-                    if (onGround)
-                    {
-                        ApplyJump();
+    private void PickAction() {
+        if (stateDelay == 0) {
+            switch (state) {
+                case State.Normal: // can init action
+                    if (Input.GetButtonDown("Jump")) {
+                        if (onGround) {
+                            ApplyJump();
+                        } else {
+                            ApplyGlide();
+                        }
                     }
-                    else
-                    {
-                        ApplyGlide();
+                    if (Input.GetButtonDown("Fire1")) {
+                        ApplyAttack();
                     }
-                }
-                if (Input.GetButtonDown("Fire1"))
-                {
-                    ApplyAttack();
-                }
-                break;
-            default:
-                if (stateDelay == 0)
-                {
-                    state = State.Normal;
-                }
-                break;
+                    break;
+                case State.Jumping:
+                    EndJump();
+                    break;
+                case State.Gliding:
+                    if (!Input.GetButtonDown("Jump") || onGround) {
+                        EndGlide();
+                    }
+                    break;
+                case State.Attacking:
+                    EndAttack();
+                    break;
+                default:
+                    Debug.LogError("Player in unimplemented state.");
+                    break;
+            }
+        } else if (state == State.Normal) { // shouldn't get here but for safety
+            stateDelay = 0;
         }
+        stateDelay -= 1; // decrement the state delay counter;
     }
 }
 
