@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -153,5 +154,10 @@ public class RoomManager : MonoBehaviour
                 GenerateRoom(data);
             }
         }
+    }
+
+    public void BuryItem(ItemData item)
+    {
+        CurrentRoom.data.items.Add(new Tuple<ItemData, Vector2>(item, player.position));
     }
 }

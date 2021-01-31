@@ -52,10 +52,12 @@ public class CameraTrackingControl : MonoBehaviour
         float yMin = roomBounds.min.y;
         float yMax = roomBounds.max.y;
 
-        Vector3 clampedTarget = new Vector3();
-        clampedTarget.x = Mathf.Clamp(TargetToTrack.position.x, xMin, xMax);
-        clampedTarget.y = Mathf.Clamp(TargetToTrack.position.y, yMin, yMax);
-        clampedTarget.z = transform.position.z;
+        Vector3 clampedTarget = new Vector3
+        {
+            x = Mathf.Clamp(TargetToTrack.position.x, xMin, xMax),
+            y = Mathf.Clamp(TargetToTrack.position.y, yMin, yMax),
+            z = transform.position.z
+        };
 
         Vector3 newCameraPosition = Vector3.SmoothDamp(transform.position, clampedTarget + offsetFromTarget, ref cameraVelocity, speedRatioToTarget); //Vector3.MoveTowards(transform.position, TargetToTrack.position, speed * speedRatioToTarget);
 

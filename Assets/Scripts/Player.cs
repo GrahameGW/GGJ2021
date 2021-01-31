@@ -2,6 +2,8 @@
 
 public class Player : Creature {
 
+    public ItemData HeldItem;
+
     void Update() {
         PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
@@ -21,6 +23,11 @@ public class Player : Creature {
                     }
                     if (Input.GetButtonDown("Attack")) {
                         ApplyAttack();
+                    }
+
+                    if (Input.GetButtonDown("Submit"))
+                    {
+                        HandleItem();
                     }
                     break;
                 case State.Jumping:
@@ -42,6 +49,19 @@ public class Player : Creature {
             stateDelay = 0;
         }
         stateDelay -= 1; // decrement the state delay counter;
+    }
+
+    private void HandleItem()
+    {
+        if (HeldItem == null)
+        {
+            // pick up item if there
+        }
+
+        else
+        {
+            RoomManager.Instance.BuryItem(HeldItem);
+        }
     }
 }
 
