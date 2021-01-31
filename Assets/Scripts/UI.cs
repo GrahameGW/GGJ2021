@@ -38,10 +38,11 @@ class UI : MonoBehaviour
         ChangeItemHeld(null);
     }
 
-    private void ChangeHealthDisplay(int newHealth)
+    private void ChangeHealthDisplay()
     {
-        playerHealth = newHealth;
-        healthText.text = $"Health: {newHealth}";
+
+        playerHealth = _player.health;
+        healthText.text = $"Health: {playerHealth}";
         Debug.Log($"New Player Health: {playerHealth} (Love UI)");
     }
 
