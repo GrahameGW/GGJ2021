@@ -38,6 +38,8 @@ public class Creature : MonoBehaviour {
 
     public UnityEvent OnHealthChange;
 
+    private Animator animator;
+
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -46,6 +48,7 @@ public class Creature : MonoBehaviour {
         }
         OnHealthChange.AddListener(UpdateHealth);
 
+        animator = GetComponent<Animator>();
     }
 
 
@@ -59,6 +62,9 @@ public class Creature : MonoBehaviour {
         } else {
             transform.Translate((horizontal * Time.deltaTime * speed), 0f, 0f);
         }
+
+        animator.SetBool("moving", horizontal != 0);
+        Debug.Log(animator.speed);
     }
 
 
@@ -100,6 +106,9 @@ public class Creature : MonoBehaviour {
         AttackData data = attackObj.GetComponent<AttackData>();
         data.SetOwner(this.GetInstanceID());
         data.SetDmg(attackDmg);
+
+        animator.SetTrigger("attack");
+        animator.ResetTrigger("attack");
     }
 
     protected void EndAttack() {
@@ -132,7 +141,6 @@ public class Creature : MonoBehaviour {
             Die();
         }
     }
-
 
     protected void Die() {
         Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) has died.");
