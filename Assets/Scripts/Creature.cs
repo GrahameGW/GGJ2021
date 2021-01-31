@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Creature : MonoBehaviour {
     [SerializeField] float speed = 1f;
@@ -163,7 +164,12 @@ public class Creature : MonoBehaviour {
     protected void Die() {
         Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) has died.");
         //TODO: on death stuff
-        Destroy(this.transform.parent);
+        if (this.gameObject.CompareTag("Player")) {
+            SceneManager.LoadScene("StartMenu");
+        } else {
+            Destroy(this.transform.parent);
+        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
