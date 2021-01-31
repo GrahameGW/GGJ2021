@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    public delegate void RoomLoadDelegate();
+    public event RoomLoadDelegate OnRoomLoaded;
+
+
     public static RoomManager Instance { get; private set; }
 
     private Room CurrentRoom
@@ -51,6 +55,7 @@ public class RoomManager : MonoBehaviour
         }
 
         CurrentRoom = newRoom;
+        OnRoomLoaded?.Invoke();
     }
 
     public void MoveRooms(Compass door)
@@ -78,6 +83,16 @@ public class RoomManager : MonoBehaviour
             Load(coord);
             player.position = GetRoomStart(door);
         }
+    }
+
+    public Bounds GetBoundsOfCurrentRoom()
+    {
+        RoomData roomData = CurrentRoom.data;
+
+        float width = roomData.EastStart.x - roomData.WestStart.x;
+        float height = roomData.NorthStart.y - roomData.SouthStart.y;
+
+        return new Bounds(Vector2.zero, new Vector2(width, height));
     }
 
     private Vector2 GetRoomStart(Compass comingFrom)
