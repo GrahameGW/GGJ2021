@@ -513,7 +513,7 @@ MonoBehaviour:
   health: 3
   jumpDelay: 10
   attackDelay: 40
-  soundData: {fileID: 0}
+  soundData: {fileID: 11400000, guid: 3fdac32df4e3e8c4cbb5af8442a7565c, type: 2}
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   health: 2
   jumpDelay: 3
   attackDelay: 5
-  soundData: {fileID: 0}
+  soundData: {fileID: 11400000, guid: c7e531c0b819a9d4bb3d9facddee8f63, type: 2}
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
