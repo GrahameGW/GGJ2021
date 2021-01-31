@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackData : MonoBehaviour {
-    public int dmg = 0;
-    public int owner;
-    public HashSet<int> hasHit;
+    protected int dmg = 0;
+    protected int owner;
+    protected HashSet<int> hasHit;
 
-    // Start is called before the first frame update
-    void Start() {
 
+    public void SetOwner(int id) {
+        owner = id;
     }
 
-    // Update is called once per frame
-    void Update() {
-
+    public void SetDmg(int damage) {
+        dmg = damage;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {

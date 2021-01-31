@@ -4,12 +4,10 @@ using UnityEngine.Events;
 public class Creature : MonoBehaviour {
     [SerializeField] float speed = 1f;
     [SerializeField] float jumpHeight = 5f;
-    [SerializeField]
-    private float glideSpeed = 0f; // how fast you fall when gliding
-
-
+    [SerializeField] float glideSpeed = 0.2f; // how fast you fall when gliding
+    [SerializeField] int attackDmg = 1;
     [SerializeField] GameObject attackFab;
-    [SerializeField] Transform attackOffest; //Where to spawn attack in relation to creature
+    [SerializeField] Vector3 attackOffest; //Where to spawn attack in relation to creature
     [SerializeField] int maxHealth = 3;
     public int health = 3; // current health
 
@@ -65,6 +63,7 @@ public class Creature : MonoBehaviour {
 
 
     protected void ApplyJump() {
+        Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) jumps.");
         state = State.Jumping;
         stateDelay = jumpDelay;
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
@@ -75,6 +74,7 @@ public class Creature : MonoBehaviour {
     }
 
     protected void ApplyGlide() {
+        Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) glides.");
         state = State.Gliding;
         //TODO
     }
@@ -84,11 +84,20 @@ public class Creature : MonoBehaviour {
     }
 
     protected void ApplyAttack() {
+        Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) attacks.");
         state = State.Attacking;
         stateDelay = attackDelay;
-        attackObj = Instantiate(attackFab, attackOffest);
+
+        Vector3 pos = transform.position + attackOffest;
+        if (sprite.flipX) {
+            pos = Vector3.Reflect(pos, transform.position);
+        }
+
+        attackObj = Instantiate(attackFab, pos, transform.rotation);
+       
         AttackData data = attackObj.GetComponent<AttackData>();
-        data.owner = this.GetInstanceID();
+        data.SetOwner(this.GetInstanceID());
+        data.SetDmg(attackDmg);
     }
 
     protected void EndAttack() {
