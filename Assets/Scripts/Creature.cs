@@ -65,7 +65,10 @@ public class Creature : MonoBehaviour {
             transform.Translate((horizontal * Time.deltaTime * speed), 0f, 0f);
         }
 
-        PlayAudio(soundData.MovementClip);
+        if (!audio.isPlaying)
+        {
+            PlayAudio(soundData.MovementClip);
+        }
     }
 
 

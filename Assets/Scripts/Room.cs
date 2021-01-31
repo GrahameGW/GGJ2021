@@ -9,28 +9,34 @@ public class Room : MonoBehaviour
     public Vector2Int coordinates;
     public List<GameObject> objects = new List<GameObject>();
     public RoomEntryPoint[] entryPoints;
-    public RoomData data;
+    private RoomData data;
     private bool itemSpawned = false;
     private AudioSource audio;
 
-
-    private void Awake()
+    public RoomData Data
     {
-        audio = gameObject.AddComponent<AudioSource>();
-        audio.clip = data.Ambience;
-    }
-
-    private void Start()
-    {
-        if (audio.clip != null)
+        get { return data; }
+        set
         {
-            audio.Play();
+            data = value;
+
+            if (audio == null)
+            {
+                audio = gameObject.AddComponent<AudioSource>();
+            }
+
+            audio.clip = data.Ambience;
+            
+            if (audio.clip != null)
+            {
+                audio.Play();
+            }
         }
     }
 
     private void OnDisable()
     {
-        if (audio.isPlaying)
+        if (audio != null && audio.isPlaying)
         {
             audio.Stop();
         }
@@ -38,15 +44,15 @@ public class Room : MonoBehaviour
 
     public void SpawnItems()
     {
-        if (data.items == null) return;
+        if (Data.items == null) return;
 
-        for (int i = 0; i < data.items.Count; i++)
+        for (int i = 0; i < Data.items.Count; i++)
         {
             if (itemSpawned) return;
 
             if (Random.Range(0, 2) == 1)
             {
-                var tuple = data.items[i]; // Tuple<ItemData, Vector2>
+                var tuple = Data.items[i]; // Tuple<ItemData, Vector2>
                 var obj = Instantiate(tuple.Item1.storedPrefab, transform);
                 obj.transform.position = tuple.Item2;
                 itemSpawned = true;
