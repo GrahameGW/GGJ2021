@@ -181,7 +181,7 @@ public class Creature : MonoBehaviour {
         if (this.gameObject.CompareTag("Player")) {
             SceneManager.LoadScene("StartMenu");
         } else {
-            Destroy(this.transform.parent);
+            Destroy(gameObject);
         }
                 
 		PlayAudio(soundData.DeathClip);
