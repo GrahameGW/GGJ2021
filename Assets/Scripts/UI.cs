@@ -31,9 +31,9 @@ class UI : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    private void ChangeHealthDisplay(int newHealth)
+    private void ChangeHealthDisplay()
     {
-        playerHealth = newHealth;
+        playerHealth = _player.health;
         Debug.Log($"New Player Health: {playerHealth} (Love UI)");
     }
 }
