@@ -12,6 +12,7 @@ class UI : MonoBehaviour
             _player = value;
             playerHealth = _player.health;
             _player.OnHealthChange.AddListener(ChangeHealthDisplay);
+            _player.OnItemChanged.AddListener(ChangeItemHeld);
         }
     }
 

@@ -133,7 +133,6 @@ public class Creature : MonoBehaviour {
         }
     }
 
-
     protected void Die() {
         Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) has died.");
         //TODO: on death stuff

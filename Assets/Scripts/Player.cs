@@ -4,6 +4,8 @@ public class Player : Creature {
 
     public ItemData HeldItem;
 
+    public UnityStringEvent OnItemChanged;
+
     void Update() {
         PickAction();
         ApplyMovement(Input.GetAxis("Horizontal"));
@@ -61,7 +63,11 @@ public class Player : Creature {
         else
         {
             RoomManager.Instance.BuryItem(HeldItem);
+            HeldItem = null;
         }
+
+        string newItem = HeldItem?.name;
+        OnItemChanged.Invoke(name);
     }
 }
 
