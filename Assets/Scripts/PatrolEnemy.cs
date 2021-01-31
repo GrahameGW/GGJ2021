@@ -64,7 +64,8 @@ public class PatrolEnemy : Creature
 
     protected void move() {
         RaycastHit2D groundCheck = Physics2D.Raycast(groundDetect.position, Vector2.down, groundDetectRange);
-        if (!groundCheck.collider) {
+        RaycastHit2D wallCheck = Physics2D.Raycast(groundDetect.position, faceRight ? Vector2.right : Vector2.left, 0.05f);
+        if (!groundCheck.collider || (wallCheck.collider && (wallCheck.collider.gameObject.layer == 11 || wallCheck.collider.gameObject.layer == 8))) {
             faceRight = !faceRight;
             groundDetect.localPosition = Vector2.Reflect(groundDetect.localPosition, Vector2.right);
         }
