@@ -11,7 +11,7 @@ public class Player : Creature {
 
 
     private void PickAction() {
-        if (stateDelay == 0) {
+        if (stateDelay <= 0) {
             switch (state) {
                 case State.Normal: // can init action
                     if (Input.GetButtonDown("Jump")) {
@@ -21,7 +21,7 @@ public class Player : Creature {
                             ApplyGlide();
                         }
                     }
-                    if (Input.GetButtonDown("Attack")) {
+                    if (Input.GetButtonDown("Fire1")) {
                         ApplyAttack();
                     }
 
