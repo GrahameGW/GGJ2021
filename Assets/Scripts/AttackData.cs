@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AttackData : MonoBehaviour {
     protected int dmg = 0;
-    protected int owner;
-    protected HashSet<int> hasHit;
+    protected int owner = 0;
+    protected HashSet<int> hasHit = new HashSet<int>();
 
 
     public void SetOwner(int id) {
@@ -18,7 +18,6 @@ public class AttackData : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         int hitId = collision.gameObject.GetInstanceID();
-
         if (owner == hitId || hasHit.Contains(hitId)) {
             // it's our attack or we have already been hit
             return;
@@ -26,6 +25,7 @@ public class AttackData : MonoBehaviour {
 
         Creature hit = collision.gameObject.GetComponent<Creature>();
         if (hit){
+            Debug.Log("Attack hit");
             hit.Damage(dmg);
             hasHit.Add(hitId);
         }
