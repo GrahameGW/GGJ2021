@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(AudioSource))]
 public class Creature : MonoBehaviour {
     [SerializeField] float speed = 1f;
     [SerializeField] float jumpHeight = 5f;
@@ -178,8 +178,13 @@ public class Creature : MonoBehaviour {
     protected void Die() {
         Debug.Log($"{this.GetType()} ({this.GetInstanceID()}) has died.");
         //TODO: on death stuff
-        Destroy(gameObject);
-        PlayAudio(soundData.DeathClip);
+        if (this.gameObject.CompareTag("Player")) {
+            SceneManager.LoadScene("StartMenu");
+        } else {
+            Destroy(this.transform.parent);
+        }
+                
+		PlayAudio(soundData.DeathClip);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
