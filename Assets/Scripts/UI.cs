@@ -11,7 +11,8 @@ class UI : MonoBehaviour
         {
             _player = value;
             playerHealth = _player.health;
-            _player.OnHealthChange.AddListener(ChangeHealthDisplay);
+            _player.OnHealthChangedUI.AddListener(ChangeHealthDisplay);
+            _player.OnItemChanged.AddListener(ChangeItemHeld);
         }
     }
 
@@ -38,10 +39,8 @@ class UI : MonoBehaviour
         ChangeItemHeld(null);
     }
 
-    private void ChangeHealthDisplay()
+    private void ChangeHealthDisplay(int playerHealth)
     {
-
-        playerHealth = _player.health;
         healthText.text = $"Health: {playerHealth}";
         Debug.Log($"New Player Health: {playerHealth} (Love UI)");
     }

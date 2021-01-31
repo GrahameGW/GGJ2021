@@ -53,8 +53,11 @@ public class Creature : MonoBehaviour {
         }
         OnHealthChange.AddListener(UpdateHealth);
 
+<<<<<<< HEAD
         audio = GetComponent<AudioSource>();
+=======
         animator = GetComponent<Animator>();
+>>>>>>> main
     }
 
 
@@ -69,12 +72,14 @@ public class Creature : MonoBehaviour {
             transform.Translate((horizontal * Time.deltaTime * speed), 0f, 0f);
         }
 
+<<<<<<< HEAD
         if (!audio.isPlaying)
         {
             PlayAudio(soundData.MovementClip);
         }
-		
+=======
         animator.SetBool("moving", horizontal != 0);
+>>>>>>> main
     }
 
 
@@ -83,7 +88,14 @@ public class Creature : MonoBehaviour {
         state = State.Jumping;
         stateDelay = jumpDelay;
         rb.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+<<<<<<< HEAD
         PlayAudio(soundData.JumpClip);
+    }
+
+    protected void EndJump() {
+        state = State.Normal;
+        PlayAudio(soundData.LandingClip);
+=======
         animator.SetTrigger("jumping");
     }
 
@@ -92,8 +104,8 @@ public class Creature : MonoBehaviour {
         {
             state = State.Normal;
             animator.SetTrigger("landing");
-			PlayAudio(soundData.LandingClip);
         }
+>>>>>>> main
     }
 
     protected void ApplyGlide() {
@@ -104,6 +116,11 @@ public class Creature : MonoBehaviour {
         animator.SetTrigger("jumping");
     }
 
+<<<<<<< HEAD
+    protected void EndGlide() {
+        state = State.Normal;
+        PlayAudio(soundData.LandingClip);
+=======
     IEnumerator GlideGravityDelay() {
         yield return new WaitForSeconds(0.3f);
         rb.gravityScale = glideSpeed;
@@ -117,8 +134,8 @@ public class Creature : MonoBehaviour {
             rb.gravityScale = 1;
             animator.SetTrigger("landing");
             StopCoroutine(gravityDelayCoroutine);
-			PlayAudio(soundData.LandingClip);
         }
+>>>>>>> main
     }
 
     protected void ApplyAttack() {
@@ -139,8 +156,11 @@ public class Creature : MonoBehaviour {
         data.SetOwner(this.gameObject.GetInstanceID());
         data.SetDmg(attackDmg);
 
-        animator.SetTrigger("attack");
+<<<<<<< HEAD
         PlayAudio(soundData.AttackClip);
+=======
+        animator.SetTrigger("attack");
+>>>>>>> main
     }
 
     protected void EndAttack() {
